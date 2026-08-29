@@ -105,7 +105,7 @@ export default function TerminePage() {
           <h1 className="font-display text-3xl font-medium text-ink">Termine</h1>
           <p className="mt-1 text-sm text-ink-soft">{formatDateLong(date)}</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button className={btnSecondary} onClick={() => setDate(addDaysISO(date, -1))} aria-label="Vorheriger Tag">
             <ChevronLeft size={16} />
           </button>

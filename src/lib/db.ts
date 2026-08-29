@@ -106,7 +106,7 @@ function seed() {
   const settingsRow = db.prepare("SELECT id FROM settings WHERE id = 1").get();
   if (!settingsRow) {
     db.prepare(
-      `INSERT INTO settings (id, salon_name, address, phone, email, opening_hours, slot_minutes)
+      `INSERT OR IGNORE INTO settings (id, salon_name, address, phone, email, opening_hours, slot_minutes)
        VALUES (1, ?, ?, ?, ?, ?, ?)`
     ).run(
       "Salon Bellezza",
@@ -121,10 +121,10 @@ function seed() {
   const categoryCount = (db.prepare("SELECT COUNT(*) as c FROM categories").get() as { c: number }).c;
   if (categoryCount === 0) {
     const insertCategory = db.prepare(
-      "INSERT INTO categories (id, name, sort_order) VALUES (?, ?, ?)"
+      "INSERT OR IGNORE INTO categories (id, name, sort_order) VALUES (?, ?, ?)"
     );
     const insertService = db.prepare(
-      `INSERT INTO services (id, category_id, name, description, duration_minutes, price_cents, active, sort_order)
+      `INSERT OR IGNORE INTO services (id, category_id, name, description, duration_minutes, price_cents, active, sort_order)
        VALUES (?, ?, ?, ?, ?, ?, 1, ?)`
     );
 
@@ -192,7 +192,7 @@ function seed() {
   const staffCount = (db.prepare("SELECT COUNT(*) as c FROM staff").get() as { c: number }).c;
   if (staffCount === 0) {
     const insertStaff = db.prepare(
-      "INSERT INTO staff (id, name, role, color, active, sort_order) VALUES (?, ?, ?, ?, 1, ?)"
+      "INSERT OR IGNORE INTO staff (id, name, role, color, active, sort_order) VALUES (?, ?, ?, ?, 1, ?)"
     );
     const staffMembers = [
       { id: "staff-1", name: "Mara Keller", role: "Salonleitung / Coloristin", color: "#B45141" },
@@ -205,7 +205,7 @@ function seed() {
   const customerCount = (db.prepare("SELECT COUNT(*) as c FROM customers").get() as { c: number }).c;
   if (customerCount === 0) {
     const insertCustomer = db.prepare(
-      "INSERT INTO customers (id, name, phone, email, notes, created_at) VALUES (?, ?, ?, ?, ?, ?)"
+      "INSERT OR IGNORE INTO customers (id, name, phone, email, notes, created_at) VALUES (?, ?, ?, ?, ?, ?)"
     );
     const now = new Date().toISOString();
     const customers = [
@@ -218,7 +218,7 @@ function seed() {
 
     const todayStr = new Date().toISOString().slice(0, 10);
     const insertAppt = db.prepare(
-      `INSERT INTO appointments (id, customer_id, customer_name, customer_phone, staff_id, service_id, date, start_time, end_time, status, notes, source, created_at)
+      `INSERT OR IGNORE INTO appointments (id, customer_id, customer_name, customer_phone, staff_id, service_id, date, start_time, end_time, status, notes, source, created_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     );
     const appts = [

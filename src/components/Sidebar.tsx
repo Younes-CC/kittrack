@@ -22,7 +22,13 @@ const NAV_ITEMS = [
   { href: "/einstellungen", label: "Einstellungen", icon: Settings },
 ];
 
-export default function Sidebar({ salonName }: { salonName: string }) {
+export default function Sidebar({
+  salonName,
+  onNavigate,
+}: {
+  salonName: string;
+  onNavigate?: () => void;
+}) {
   const pathname = usePathname();
 
   return (
@@ -45,6 +51,7 @@ export default function Sidebar({ salonName }: { salonName: string }) {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onNavigate}
               className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
                 active
                   ? "bg-white/10 text-white"
@@ -62,6 +69,7 @@ export default function Sidebar({ salonName }: { salonName: string }) {
         <Link
           href="/buchen"
           target="_blank"
+          onClick={onNavigate}
           className="flex items-center gap-3 rounded-lg border border-white/10 px-3 py-2.5 text-sm text-sidebar-soft transition-colors hover:bg-white/5 hover:text-white"
         >
           <Globe size={17} strokeWidth={1.75} />
