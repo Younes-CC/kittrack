@@ -19,8 +19,9 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Salon Bellezza — Verwaltung",
-  description: "Termine, Preise und Kundenverwaltung für den Friseursalon.",
+  title: "Bücher, die weitergegeben werden.",
+  description:
+    "Ein Teil meiner Bücher wird kostenlos an die Community weitergegeben — such dir eines aus, das dir Mehrwert bietet.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
