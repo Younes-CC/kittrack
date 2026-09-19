@@ -7,6 +7,15 @@
 -- vergeben — Aufrufe erfolgen ausschließlich serverseitig
 -- (create_reservation über den Service-Role-Key, die admin_* Funktionen
 -- über eine authentifizierte Admin-Session).
+--
+-- ACHTUNG für neue SECURITY DEFINER Funktionen: Supabase vergibt per
+-- ALTER DEFAULT PRIVILEGES automatisch EXECUTE an anon/authenticated auf
+-- jede neue Funktion im public-Schema — "revoke all ... from public" allein
+-- reicht NICHT, um das zu verhindern. Immer zusätzlich explizit
+-- "revoke execute on function ... from anon [, authenticated]" setzen und
+-- mit dem Security Advisor (mcp__Supabase__get_advisors) verifizieren.
+-- Siehe 0006_harden_functions.sql für die Korrektur der ursprünglichen
+-- Version dieser Datei.
 
 -- ---------------------------------------------------------------------------
 -- Bestellnummer generieren, z. B. MB-7K3F2
