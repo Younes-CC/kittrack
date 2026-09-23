@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Buns &amp; Baguettes – Flyer A5</title>
+<style>
+  @font-face {
+    font-family: "Archivo"; src: url(fonts/archivo-latin.woff2) format("woff2");
+    font-weight: 100 900; font-stretch: 62% 125%; font-display: block;
+  }
+  @font-face {
+    font-family: "Noto Naskh Arabic"; src: url(fonts/noto-naskh-arabic.woff2) format("woff2");
+    font-weight: 600; font-display: block;
+  }
+  /* A5 (148 × 210 mm) + 3 mm Beschnitt rundum = 154 × 216 mm */
+  @page { size: 154mm 216mm; margin: 0; }
+
+  :root {
+    --ink: #151312;
+    --ink-2: #2a2623;
+    --orange: #e86e37;
+    --cream: #f3eadb;
+    --muted: #8d8279;
+    --bleed: 3mm;
+    --safe: 10mm; /* Abstand Endformat → Text */
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #777; }
+  body {
+    font-family: "Archivo", sans-serif;
+    font-variation-settings: "wdth" 100;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+
+  .page {
+    position: relative;
+    width: 154mm;
+    height: 216mm;
+    overflow: hidden;
+    page-break-after: always;
+    break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+
+  /* Inhaltsfläche = Endformat minus Sicherheitsabstand */
+  .safe {
+    position: absolute;
+    inset: calc(var(--bleed) + var(--safe));
+  }
+
+  .logo svg { display: block; width: 100%; height: auto; }
+
+  .cond { font-variation-settings: "wdth" 62; }
+
+  /* ---------- Halal-Siegel ---------- */
+  .halal {
+    width: 17mm; height: 17mm;
+    border: 0.35mm solid currentColor;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    text-align: center;
+    line-height: 1;
+  }
+  .halal > div { display: flex; flex-direction: column; align-items: center; }
+  .halal .ar { font-family: "Noto Naskh Arabic", serif; font-size: 12pt; font-weight: 600; line-height: 1.1; }
+  .halal .lat { font-size: 4.4pt; font-weight: 700; letter-spacing: .24em; margin: .6mm 0 0 .24em; text-transform: uppercase; }
+
+  /* =====================================================
+     VORDERSEITE
+     ===================================================== */
+  .front { background: var(--ink); color: var(--cream); }
+
+  .front .top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+  }
+  .front .logo { width: 44mm; color: var(--orange); }
+  .front .halal { color: var(--cream); }
+
+  /* Die zwei Formen: rund (Bun) und lang (Baguette) */
+  .shapes { position: absolute; left: 0; right: 0; top: 48mm; }
+
+  .row { position: relative; }
+  .row-round { height: 56mm; }
+  .round {
+    position: absolute; left: 0; top: 0;
+    width: 56mm; height: 56mm; border-radius: 50%;
+    background: var(--orange); color: var(--ink);
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .row-round .word {
+    position: absolute; left: 63mm; top: 1mm;
+  }
+
+  .word .big {
+    font-weight: 900; font-variation-settings: "wdth" 62;
+    font-size: 70pt; line-height: .8; letter-spacing: -.01em;
+    text-transform: uppercase;
+  }
+  .word .sub, .row-long .sub {
+    margin-top: 3.2mm;
+    font-size: 7.6pt; line-height: 1.38; font-weight: 400; color: #cfc4b5;
+    max-width: 44mm; text-wrap: balance;
+  }
+
+  .row-long { margin-top: 6mm; }
+  .row-long .word .big { color: var(--cream); }
+  .row-long .big { white-space: nowrap; font-size: 81pt; }
+  .row-long .sub { max-width: 108mm; margin-top: 2.8mm; }
+  .long {
+    margin-top: 3.5mm;
+    width: 100%; height: 18mm; border-radius: 9mm;
+    background: var(--orange); color: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 9mm;
+  }
+
+  .price-tag { line-height: 1; }
+  .price-tag .from { font-size: 6.6pt; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
+  .price-tag .num {
+    font-weight: 900; font-variation-settings: "wdth" 62;
+    font-size: 38pt; letter-spacing: -.01em;
+  }
+  .price-tag .num small { font-size: 16pt; vertical-align: 13pt; margin-left: .6mm; }
+  .round .price-tag { text-align: center; }
+  .round .price-tag .from { display: block; margin-bottom: 1.5mm; }
+  .round .label, .long .label {
+    font-size: 6.6pt; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+  }
+  .round .label { margin-top: 2mm; }
+  .long .price-tag { display: flex; align-items: baseline; gap: 2.4mm; }
+
+  /* Menü-Leiste unten */
+  .front .deal {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    border-top: .3mm solid var(--ink-2);
+    padding-top: 5mm;
+    display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 6mm;
+  }
+  .deal .title {
+    font-weight: 900; font-variation-settings: "wdth" 62; text-transform: uppercase;
+    font-size: 20pt; line-height: .92; white-space: nowrap;
+  }
+  .deal .title em { font-style: normal; color: var(--orange); }
+  .deal .desc { margin-top: 2mm; font-size: 7.4pt; color: #cfc4b5; line-height: 1.4; }
+  .deal .plus {
+    text-align: right; line-height: 1;
+  }
+  .deal .plus .num { font-weight: 900; font-variation-settings: "wdth" 62; font-size: 30pt; color: var(--orange); }
+  .deal .plus .num small { font-size: 13pt; vertical-align: 10pt; margin-left: .5mm; }
+  .deal .plus .cap { font-size: 6pt; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2mm; }
+
+  /* =====================================================
+     RÜCKSEITE – Karte
+     ===================================================== */
+  .back { background: var(--cream); color: var(--ink); }
+
+  .back header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    padding-bottom: 4mm; border-bottom: .5mm solid var(--ink);
+  }
+  .back header h1 {
+    letter-spacing: -.005em;
+    font-weight: 900; font-variation-settings: "wdth" 62; text-transform: uppercase;
+    font-size: 40pt; line-height: .8; letter-spacing: -.01em;
+  }
+  .back header .right { display: flex; align-items: center; gap: 4mm; }
+  .back .logo { width: 25mm; color: var(--orange); }
+  .back .halal { width: 13mm; height: 13mm; border-width: .3mm; }
+  .back .halal .ar { font-size: 9pt; }
+  .back .halal .lat { font-size: 3.6pt; margin-top: .3mm; }
+
+  .section { margin-top: 4.2mm; }
+  .section-head {
+    display: flex; align-items: baseline; gap: 3mm;
+    font-size: 6.6pt; font-weight: 700; letter-spacing: .24em; text-transform: uppercase;
+    margin-bottom: 1mm;
+  }
+  .section-head::after { content: ""; flex: 1; height: .25mm; background: var(--orange); transform: translateY(-.6mm); }
+  .section-head .count { color: var(--orange); }
+
+  .item {
+    display: grid; grid-template-columns: 7.5mm 1fr auto; column-gap: 1.5mm;
+    padding: 1.9mm 0 2mm;
+    border-bottom: .2mm solid #d8ccb9;
+  }
+  .item:last-child { border-bottom: 0; }
+  .item .no {
+    font-weight: 800; font-size: 7pt; color: var(--orange); padding-top: 1.3mm;
+  }
+  .item .name {
+    font-weight: 800; font-variation-settings: "wdth" 75; text-transform: uppercase;
+    font-size: 11.5pt; line-height: 1.05; letter-spacing: .005em;
+  }
+  .item .tag {
+    display: inline-block; vertical-align: 1.2pt; margin-left: 1.6mm;
+    font-size: 5pt; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    font-variation-settings: "wdth" 100;
+    background: var(--orange); color: var(--cream);
+    padding: .5mm 1.2mm .4mm; border-radius: .6mm;
+  }
+  .item .desc {
+    grid-column: 2; margin-top: .9mm;
+    font-size: 7pt; line-height: 1.38; color: #5a514a; max-width: 92mm;
+  }
+  .item .price {
+    grid-column: 3; grid-row: 1;
+    font-weight: 900; font-variation-settings: "wdth" 62; font-size: 15pt; line-height: 1;
+  }
+
+  .duo { display: grid; grid-template-columns: 1fr 1fr; column-gap: 6mm; }
+  .duo .item { border-bottom: 0; }
+
+  .combo {
+    margin-top: 4mm;
+    background: var(--ink); color: var(--cream);
+    border-radius: 2mm;
+    padding: 4.4mm 5mm;
+    display: grid; grid-template-columns: auto 1fr auto; column-gap: 4.5mm; align-items: center;
+  }
+  .combo .m {
+    width: 9mm; height: 9mm; border-radius: 50%;
+    background: var(--orange); color: var(--ink);
+    display: grid; place-items: center;
+    font-weight: 900; font-size: 11pt;
+  }
+  .combo .t {
+    font-weight: 900; font-variation-settings: "wdth" 62; text-transform: uppercase;
+    font-size: 16pt; line-height: 1;
+  }
+  .combo .d { font-size: 7pt; color: #cfc4b5; margin-top: 1mm; }
+  .combo .p { font-weight: 900; font-variation-settings: "wdth" 62; font-size: 20pt; line-height: 1; color: var(--orange); }
+  .combo .p small { font-size: 7pt; font-variation-settings: "wdth" 100; font-weight: 700; letter-spacing: .12em; color: #cfc4b5; margin-right: 1.4mm; vertical-align: 3pt; }
+
+  .back footer {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 5.8pt; color: var(--muted); letter-spacing: .02em;
+  }
+  .back footer .claims { font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
+
+  /* Druckersicht: Schnittkante zur Kontrolle (nur Bildschirm-Vorschau mit ?trim) */
+  .show-trim .page::after {
+    content: ""; position: absolute; inset: var(--bleed);
+    outline: .2mm dashed #00c2ff; pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= VORDERSEITE ================= -->
+<section class="page front">
+  <div class="safe">
+    <div class="top">
+      <div class="logo"><!--LOGO--></div>
+      <div class="halal"><div><div class="ar">حلال</div><div class="lat">Halal</div></div></div>
+    </div>
+
+    <div class="shapes">
+      <div class="row row-round">
+        <div class="round">
+          <div class="price-tag">
+            <span class="from">ab</span>
+            <span class="num">8,50<small>€</small></span>
+          </div>
+          <div class="label">Smashburger</div>
+        </div>
+        <div class="word">
+          <div class="big">Rund</div>
+          <p class="sub">Frisch auf der Platte gesmasht. 100&nbsp;% Rind oder extra crunchy Hähnchen – im Bäcker-Bun.</p>
+        </div>
+      </div>
+
+      <div class="row row-long">
+        <div class="word"><div class="big">oder lang.</div></div>
+        <div class="long">
+          <span class="label">Baguettes</span>
+          <div class="price-tag"><span class="from">ab</span><span class="num">9,00<small>€</small></span></div>
+        </div>
+        <p class="sub">Warmes Baguette mit marinierter Hähnchenbrust oder Rinderhack, American Cheese und feiner Paprika-Crème.</p>
+      </div>
+    </div>
+
+    <div class="deal">
+      <div>
+        <div class="title">Mach’s zum <em>Menü.</em></div>
+        <p class="desc">Jeder Burger oder jedes Baguette – plus frische Pommes und Softdrink.</p>
+      </div>
+      <div class="plus">
+        <div class="cap">Aufpreis</div>
+        <div class="num">+6,00<small>€</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RÜCKSEITE ================= -->
+<section class="page back">
+  <div class="safe">
+    <header>
+      <h1>Die<br>Karte</h1>
+      <div class="right">
+        <div class="halal"><div><div class="ar">حلال</div><div class="lat">Halal</div></div></div>
+        <div class="logo"><!--LOGO--></div>
+      </div>
+    </header>
+
+    <div class="section">
+      <div class="section-head"><span>Smashburger</span><span class="count">01–04</span></div>
+
+      <div class="item">
+        <span class="no">01</span>
+        <div class="name">Klassisch Amerikanisch</div>
+        <span class="price">8,50</span>
+        <p class="desc">100&nbsp;% Rinderhackfleisch-Patty, Bäcker-Bun, American Cheese, rote Zwiebeln, Gewürzgurken, Ketchup-Senf</p>
+      </div>
+      <div class="item">
+        <span class="no">02</span>
+        <div class="name">Cheeseburger</div>
+        <span class="price">9,00</span>
+        <p class="desc">100&nbsp;% Rinderhackfleisch-Patty, Bäcker-Bun, Cheddar, Rucola, Tomate, rote Zwiebeln, Gewürzgurken, Joppie-Ketchup-Senf</p>
+      </div>
+      <div class="item">
+        <span class="no">03</span>
+        <div class="name">Chili-Cheeseburger<span class="tag">Scharf</span></div>
+        <span class="price">9,50</span>
+        <p class="desc">100&nbsp;% Rinderhackfleisch-Patty, Bäcker-Bun, Cheddar, Rucola, Tomate, rote Zwiebeln, Jalapeños, scharfe Soße, Ketchup-Senf</p>
+      </div>
+      <div class="item">
+        <span class="no">04</span>
+        <div class="name">Chicken Burger</div>
+        <span class="price">9,00</span>
+        <p class="desc">Extra crunchy Hähnchenbrust-Patty in Cornflakes-Panade, Bäcker-Bun, Cheddar, Rucola, Tomate, Zwiebeln, Gewürzgurken, Mayo, Sweet-Chili-Soße</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><span>Baguettes</span><span class="count">05–06</span></div>
+      <div class="item">
+        <span class="no">05</span>
+        <div class="name">Hähnchen Baguette</div>
+        <span class="price">9,00</span>
+        <p class="desc">Marinierte Hähnchenbrust, American Cheese, Salat, feine Paprika-Crème</p>
+      </div>
+      <div class="item">
+        <span class="no">06</span>
+        <div class="name">Hackfleisch Baguette</div>
+        <span class="price">10,00</span>
+        <p class="desc">Mariniertes Rinderhackfleisch (100&nbsp;% Rind), American Cheese, Salat, feine Paprika-Crème</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><span>Snacks &amp; Sides</span><span class="count">07–08</span></div>
+      <div class="duo">
+        <div class="item">
+          <span class="no">07</span>
+          <div class="name">Frische Pommes</div>
+          <span class="price">4,00</span>
+        </div>
+        <div class="item">
+          <span class="no">08</span>
+          <div class="name">Chicken Fingers</div>
+          <span class="price">6,00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="combo">
+      <div class="m">M</div>
+      <div>
+        <div class="t">Menü-Aufpreis</div>
+        <div class="d">Burger oder Baguette + frische Pommes + Softdrink</div>
+      </div>
+      <div class="p"><small>+</small>6,00</div>
+    </div>
+
+    <footer>
+      <span class="claims">100&nbsp;% Rind · Halal · Frisch gesmasht</span>
+      <span>Alle Preise in Euro · Allergene &amp; Zusatzstoffe: bitte unser Personal fragen.</span>
+    </footer>
+  </div>
+</section>
+
+</body>
+</html>
