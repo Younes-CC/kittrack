@@ -83,12 +83,14 @@
 
   .row { position: relative; }
   .row-round { height: 56mm; }
+  /* Burger: flache Grafik, Preis sitzt im oberen Bun */
   .round {
     position: absolute; left: 0; top: 0;
-    width: 56mm; height: 56mm; border-radius: 50%;
-    background: var(--orange); color: var(--ink);
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    width: 56mm; height: 56mm; color: var(--ink);
   }
+  .round svg, .long svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .round .price-tag { position: absolute; left: 0; right: 0; top: 11.2mm; }
+  .round .label { position: absolute; left: 0; right: 0; top: 45.3mm; text-align: center; }
   .row-round .word {
     position: absolute; left: 63mm; top: 1mm;
   }
@@ -110,10 +112,10 @@
   .row-long .sub { max-width: 108mm; margin-top: 2.8mm; }
   .long {
     margin-top: 3.5mm;
-    width: 100%; height: 18mm; border-radius: 9mm;
-    background: var(--orange); color: var(--ink);
+    position: relative;
+    width: 100%; height: 18mm; color: var(--ink);
     display: flex; align-items: center; justify-content: space-between;
-    padding: 0 9mm;
+    padding: 0 12mm 0 13mm;
   }
 
   .price-tag { line-height: 1; }
@@ -128,8 +130,8 @@
   .round .label, .long .label {
     font-size: 6.6pt; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
   }
-  .round .label { margin-top: 2mm; }
   .long .price-tag { display: flex; align-items: baseline; gap: 2.4mm; }
+  .long > span, .long > div { position: relative; }
 
   /* Menü-Leiste unten */
   .front .deal {
@@ -260,7 +262,28 @@
     <div class="shapes">
       <div class="row row-round">
         <div class="round">
-          <div class="price-tag">
+          <svg viewBox="0 0 560 560" aria-hidden="true">
+            <!-- oberer Bun -->
+            <path d="M22 292 C22 128 132 38 280 38 C428 38 538 128 538 292 C538 306 528 314 512 314 H48 C32 314 22 306 22 292 Z" fill="#e86e37"/>
+            <g fill="#f3eadb">
+              <ellipse cx="208" cy="78" rx="11" ry="5" transform="rotate(-18 208 78)"/>
+              <ellipse cx="282" cy="64" rx="11" ry="5"/>
+              <ellipse cx="356" cy="80" rx="11" ry="5" transform="rotate(16 356 80)"/>
+              <ellipse cx="140" cy="122" rx="11" ry="5" transform="rotate(-38 140 122)"/>
+              <ellipse cx="424" cy="120" rx="11" ry="5" transform="rotate(34 424 120)"/>
+              <ellipse cx="92" cy="196" rx="11" ry="5" transform="rotate(-62 92 196)"/>
+              <ellipse cx="470" cy="192" rx="11" ry="5" transform="rotate(58 470 192)"/>
+              <ellipse cx="78" cy="262" rx="11" ry="5" transform="rotate(-80 78 262)"/>
+              <ellipse cx="484" cy="258" rx="11" ry="5" transform="rotate(78 484 258)"/>
+            </g>
+            <!-- Smash-Patty -->
+            <path d="M34 356 C60 346 120 350 160 347 C230 343 330 350 400 346 C450 344 500 348 526 356 C540 372 540 404 526 418 C470 426 380 422 280 424 C180 426 90 426 34 418 C20 402 20 372 34 356 Z" fill="#8a3818"/>
+            <!-- Käse mit Tropfen -->
+            <path d="M14 326 H546 V346 H470 C462 346 458 352 458 360 V376 C458 386 440 386 440 376 V358 C440 350 434 346 426 346 H250 C242 346 238 352 238 360 V388 C238 398 220 398 220 388 V358 C220 350 214 346 206 346 H112 C104 346 100 352 100 360 V368 C100 378 82 378 82 368 V358 C82 350 76 346 68 346 H14 Z" fill="#f3eadb"/>
+            <!-- unterer Bun -->
+            <path d="M34 432 H526 C534 432 538 436 538 444 V470 C538 506 510 522 470 522 H90 C50 522 22 506 22 470 V444 C22 436 26 432 34 432 Z" fill="#e86e37"/>
+          </svg>
+                    <div class="price-tag">
             <span class="from">ab</span>
             <span class="num">8,50<small>€</small></span>
           </div>
@@ -275,7 +298,15 @@
       <div class="row row-long">
         <div class="word"><div class="big">oder lang.</div></div>
         <div class="long">
-          <span class="label">Baguettes</span>
+          <svg viewBox="0 0 1280 180" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M8 96 C14 50 70 18 190 10 C420 -2 860 -2 1090 10 C1210 18 1266 50 1272 96 C1266 140 1210 166 1090 172 C860 182 420 182 190 172 C70 166 14 140 8 96 Z" fill="#e86e37"/>
+            <g fill="#f39767">
+              <path d="M352 118 C402 72 464 46 516 44 C480 86 418 116 352 118 Z"/>
+              <path d="M522 118 C572 72 634 46 686 44 C650 86 588 116 522 118 Z"/>
+              <path d="M692 118 C742 72 804 46 856 44 C820 86 758 116 692 118 Z"/>
+            </g>
+          </svg>
+                    <span class="label">Baguettes</span>
           <div class="price-tag"><span class="from">ab</span><span class="num">9,00<small>€</small></span></div>
         </div>
         <p class="sub">Warmes Baguette mit marinierter Hähnchenbrust oder Rinderhack, American Cheese und feiner Paprika-Crème.</p>
